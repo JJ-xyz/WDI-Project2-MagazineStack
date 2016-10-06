@@ -1,0 +1,61 @@
+//*-----------------------------------------------------*
+//* Initialization process                              *
+//*-----------------------------------------------------*
+// =================== Express =======================
+var express = require('express');
+var app = express();
+// ============ Serve Static Assets ==================
+app.use(express.static(__dirname + '/public'));
+// ============= fomrs handlers ======================
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
+app.use(bodyParser.json());
+// ================ Debugging ========================
+pry = require('pryjs');
+var logger = require('morgan');
+app.use(logger('dev'));
+// ============= Express + Handlebars ================
+var hbs = require('hbs');
+app.set("view engine", "hbs");
+require('handlebars-form-helpers').register(hbs.handlebars);
+// ================ MONGO Database ===================
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/magazine');
+mongoose.Promise = global.Promise;
+//*-----------------------------------------------------*
+//* MODULES definition - Midleware                      *
+//*-----------------------------------------------------*
+var UserModel = require('./models/user.js');
+
+//*-----------------------------------------------------*
+//* PASSPORT definition - Strategy                      *
+//*-----------------------------------------------------*
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+//*-----------------------------------------------------*
+//* PASSPORT Midleware configuration                    *
+//*-----------------------------------------------------*
+// =========== Configure passport sessions =============
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(UserModel.createStrategy());
+passport.serializeUser(UserModel.serializeUser());
+passport.deserializeUser(UserModel.deserializeUser());
+
+//*-----------------------------------------------------*
+//* Routing rules for Midleware modules                 *
+//*-----------------------------------------------------*
+app.use('/', require('./controllers/home.js'));
+app.use('/magazine', require('./controllers/magazine.js'));
+app.use('/sec', require('./controllers/sec.js');
+
+app.listen(3000);
