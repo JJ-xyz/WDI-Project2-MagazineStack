@@ -19,20 +19,28 @@ var MagazineModel = require('../models/magazine.js');
 //*-----------------------------------------------------*
 // ROUTE :: Browse the Index
 router.get('/', function(req, res){
-  MagazineModel.find({}, function(err, allMagazine){
-    if (err) { console.log("*1*", err)};
-    var viewData = {
-      pokemonIndex: AllMagazine,
-      title: 'Browse Magazine'
-    };
-    // var searchString = req.query.searchString;
-    // if (searchString) {
-    //    viewData.pokemonIndex = allPokemon.filter(function(pokemon){
-    //      return pokemon.name.toLowerCase().includes(searchString.toLowerCase());
-    //    });
-    //  };
-    res.render('magazine/index', viewData);
-  });
+  console.log("===req.user===", req.user);
+  if (!req.user) {
+    console.log("tiene que login");
+    var viewData = {title: 'Magazine Login'};
+    res.render('sec/login', viewData);
+    console.log("se envio para login");
+  } else {
+    MagazineModel.find({}, function(err, allMagazine){
+      if (err) { console.log("*1*", err)};
+      var viewData = {
+        magazineIndex: allMagazine,
+        title: 'Browse Magazine'
+      };
+      // var searchString = req.query.searchString;
+      // if (searchString) {
+      //    viewData.pokemonIndex = allPokemon.filter(function(pokemon){
+      //      return pokemon.name.toLowerCase().includes(searchString.toLowerCase());
+      //    });
+      //  };
+      res.render('magazine/index', viewData);
+    });
+  }
 });
 
 // // ROUTE :: Create the NEW pokemon

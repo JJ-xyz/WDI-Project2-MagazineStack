@@ -22,7 +22,15 @@ var authorization = function(req, res, next) {
 //*-----------------------------------------------------*
 // ========== Root NO access: /sec =====================
 router.get('/', function(req, res) {
-  res.json({status: 403, message: 'Forbiden for you'})
+  res.json({status: 403, message: 'Forbiden for you'});
+});
+
+// ========== Root for signup/sec =====================
+router.get('/signup', function(req, res) {
+  var viewData = {
+    title: 'New User'
+  };
+  res.render('sec/signup', viewData);
 });
 
 // ========== Root create userId: /sec/signup =========
@@ -37,7 +45,7 @@ router.post('/signup', function(req, res) {
       } else {
         console.log("[ XYZ ] new user sign-up", req.body.username);
       }
-    res.redirect('/home');
+    res.redirect('/');
   });
 });
 
@@ -49,14 +57,14 @@ router.post('/login', passport.authenticate('local'),
         return next(err);
       };
          console.log("[ XYZ ] new user sign-in", req.body.username);
-         res.redirect('/home');
+         res.redirect('/magazine');
   });
 });
 
 // ========== Root logoff /sec/logout ========
 router.delete('/logout', function(req, res) {
   req.logout();
-  res.redirect('/home');
+  res.redirect('/');
   console.log("[ XYZ ] current user Sign-off");
 });
 

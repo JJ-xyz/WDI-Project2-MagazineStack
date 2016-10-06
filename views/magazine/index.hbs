@@ -1,0 +1,19 @@
+<form>
+  <label name='searchString'> Filter List By *Name: </label>
+  <input name='searchString'>
+  <input type='submit' value='Filter'>
+</form>
+<form>
+  <input type='submit' value='Clear Filter'>
+</form>
+<ul>
+{{#each magazineIndex}}
+  <li>
+    <a href='/magazine/{{magazinename}}'>
+      <span> #{{magazinename}} : {{coverTitle}} </span>
+    </a>
+  </li>
+{{/each}}
+</ul>
+
+<a href='/magazine/new'> Add a new Magazine To the Index </a>
