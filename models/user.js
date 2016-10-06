@@ -15,7 +15,7 @@ var ObjectId = Schema.ObjectId;
 //* Create the schema objects                           *
 //*-----------------------------------------------------*
 var UserSchema = new Schema({
-  username: { type: String, unique: true},
+  username: String,
   password: String,
   favoriteBook: String,
   favoriteColor: String,

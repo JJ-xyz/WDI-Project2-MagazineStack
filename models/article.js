@@ -2,7 +2,7 @@
 //* Initialization process                              *
 //*-----------------------------------------------------*
 var mongoose = require('mongoose');
-var UserSchema = require('./user.js'); // embeded here
+//var MagazineSchema = require('./magazine.js'); // embeded here
 
 //*-----------------------------------------------------*
 //* Define the schema constructor                       *
@@ -18,12 +18,14 @@ var ArticleSchema = new Schema({
   author: String,
   topic: String,
   abstract: String,
-  page: Date,
-  scoreAverage: Number,
-  Comments: { user: UserSchema,
-              score: { type: Number, min: 1, max: 5 },
-              text: String },
-  tags: [String]
+  // page: Number,                       // for future use
+  // scoreAverage: Number,               // for future use
+  // Comments: [ { user: String,         // for future use
+  //             score:                  // for future use
+  //             { type: Number,         // for future use
+  //               min: 1, max: 5 },     // for future use
+  //             text: String } ],       // for future use
+  // tags: [String]                      // for future use
 });
 
 //*-----------------------------------------------------*

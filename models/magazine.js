@@ -2,8 +2,7 @@
 //* Initialization process                              *
 //*-----------------------------------------------------*
 var mongoose = require('mongoose');
-var ArticleSchema = require('./article.js'); // embeded
-var UserSchema = require('.user.js'); // embeded here
+var ArticleSchema = require('./article.js').schema; // embeded
 //*-----------------------------------------------------*
 //* Define the schema constructor                       *
 //*-----------------------------------------------------*
@@ -21,11 +20,11 @@ var MagazineSchema = new Schema({
   editionNumber: Number,
   articleList: [ArticleSchema],
   baseLocation: String,
-  whereItIs: String,
-  ownedBy: UserSchema,
-  borrowBy: UserSchema,
-  borrowDate: Date,
-  returnedDate: Date,
+  // whereItIs: String,                // For future use
+  // ownedBy: String,                  // For future use
+  // borrowBy: String,                 // For future use
+  // borrowDate: Date,                 // for future use
+  // returnedDate: Date,               // for future use
 });
 
 //*-----------------------------------------------------*
