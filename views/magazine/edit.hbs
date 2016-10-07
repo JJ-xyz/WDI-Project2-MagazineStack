@@ -1,9 +1,9 @@
-<h2> View Magazine Edit </h2>
+<h2> Edit Magazine </h2>
 <main>
-  <p> Enter the magazine info to add </p>
+  <p> Enter the magazine info to edit </p>
   <form class="edit-magazine" method="POST" action="/magazine/{{mag._id}}?_method=PATCH">
     <label for="magazinename">Magazine Name:</label>
-    <input type="text" name="magazinename" value="{{mag.magazinename}}">
+    <input name="magazinename" value="{{mag.magazinename}}">
     <label for="coverTitle">Cover Title:</label>
     <input name="coverTitle" value="{{mag.coverTitle}}">
     <label for="editionPeriod">Edition Period:</label>
@@ -21,6 +21,8 @@
     </select>
     <input type="submit" value=" Update Magazine ">
   </form>
-
+  <form class="delete-magazine" method='POST' action='/magazine/{{mag._id}}?_method=DELETE'>
+    <input type='submit' value='Delete Magazine'/>
+  </form>
   <a href='/article/new'> Add new Article </a>
 </main>
