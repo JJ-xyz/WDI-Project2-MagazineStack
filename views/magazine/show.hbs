@@ -1,0 +1,21 @@
+
+<h2> {{magazinename}}</h2>
+<h3> {{coverTitle}}</h3>
+<p>Volume {{editionVolume}} Number {{editionNumber}}</p>
+<p><span>Period {{editionPeriod}}</span></p>
+<p>This magazine is currently located at the {{baseLocation}}</P>
+<main>
+  <h3> Articles </h3>
+  <ul>
+  {{#each articleList}}
+    <li>
+      <a href='/article/{{article}}'>
+        <span> {{title}} : {{author}} </span>
+      </a>
+    </li>
+  {{/each}}
+  </ul>
+</main><hr>
+<footer>
+  <a href='/magazine/{{magazine}}/edit'> Edit this magazine </a>
+</footer>

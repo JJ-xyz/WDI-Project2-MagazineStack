@@ -1,0 +1,26 @@
+<h2> New Magazine Info </h2>
+<main>
+  <p> Enter the magazine info to add </p>
+  <form class="new-magazine" method="POST" action="/magazine">
+    <label for="magazinename">Magazine Name:</label>
+    <input name="magazinename">
+    <label for="coverTitle">Cover Title:</label>
+    <input name="coverTitle">
+    <label for="editionPeriod">Edition Period:</label>
+    <input name="editionPeriod">
+    <label for="editionVolume">Volume:</label>
+    <input name="editionVolume">
+    <label for="editionNumber">Number:</label>
+    <input name="editionNumber">
+    <label for="baseLocation">Current Location:</label>
+    <Select name="baseLocation">
+      <option value="book-shelf">Book Shelf</option>
+      <option value="living-room">Living Room</option>
+      <option value="0ffice">Office</option>
+      <option value="garage">Garage</option>
+    </select>
+    <input type="submit" value=" Add Magazine ">
+  </form>
+
+  <a href='/article/new'> Add new Article </a>
+</main>

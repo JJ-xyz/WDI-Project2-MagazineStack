@@ -22,7 +22,6 @@ router.get('/', function(req, res){
     var viewData = {title: 'Magazine Login'};
     res.render('sec/login', viewData);
   } else {
-    //var displayUser = req.user.username;
     MagazineModel.find({}, function(err, allMagazine){
       if (err) { console.log("*1*", err)};
       var viewData = {
@@ -69,32 +68,36 @@ router.get('/new', function(req, res){
     var viewData = {title: 'Magazine Login'};
     res.render('sec/login', viewData);
   } else {
-  var viewData = {title: 'New Magazine'}
+  var viewData = {title: 'New Magazine', actualUser: req.user.username}
   res.render('magazine/new', viewData);
   };
 });
 
-// // ROUTE :: SHOW to Display one pokemon page
-// router.get('/:npn', function(req, res){
-//   // - Tweak form data
-//   req.params.npn = Number(req.params.npn);
-//   // - Display SHOW page
-//   PokemonModel.findOne({npn : req.params.npn}, function(err, onePokemon){
-//     if (err) { console.log("*3*", err)};
-//     if (onePokemon) {
-//       var viewData = onePokemon;
-//       viewData.title = onePokemon.name;
-//       viewData.imageURL = `https://img.pokemondb.net/artwork/${onePokemon.name.toLowerCase()}.jpg`
-//       // ------- this is not working - check it later ---START
-//       //console.log("image", viewData.imageURL);
-//       // if (!viewData.imageURL) { viewData.imageURL = "https://boost-rankedboost.netdna-ssl.com/wp-content/uploads/2016/07/PokeBall.png" }
-//     // ------- this is not working - check it later ---END
-//       res.render('pokemon/show', viewData);
-//     } else {
-//       res.redirect('/pokemon');
-//     };
-//   });
-// });
+//*-----------------------------------------------------*
+//* ROUTE :: SHOW :: Display ONE magazine page          *
+//*-----------------------------------------------------*
+router.get('/:magId', function(req, res){
+  if (!req.user) {
+    var viewData = {title: 'Magazine Login'};
+    res.render('sec/login', viewData);
+  } else {
+    MagazineModel.findOne({_id : req.params.magId}, function(err, oneMagazine){
+      if (err) { console.log("*3*", err)};
+      if (oneMagazine) {
+        var viewData = oneMagazine;
+        viewData.title = "Magazine";
+        viewData.actualUser = req.user.username;
+        res.render('magazine/show', viewData);
+      } else {
+        res.redirect('/magazine');
+      };
+    });
+  };
+
+
+
+
+});
 
 
 // // ROUTE :: UPDATE the pokemon
@@ -130,7 +133,9 @@ router.get('/new', function(req, res){
 //   });
 // });
 
-
+//*-----------------------------------------------------*
+//* ROUTE :: EDIT :: Display EDIT a magazine page       *
+//*-----------------------------------------------------*
 // // ROUTE :: EDIT to Display EDIT page
 // router.get('/:npn/edit', function(req, res){
 //   // Tweak form data
