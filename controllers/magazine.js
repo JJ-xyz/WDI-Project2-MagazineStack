@@ -4,9 +4,9 @@
 var express = require('express');
 var router = express.Router();
 var MagazineModel = require('../models/magazine.js');
-// //*-----------------------------------------------------*
-// //* DATA Sources Initialization - Mongo DB              *
-// //*-----------------------------------------------------*
+// //*--------------------------------------------------*
+// //* DATA Sources - Mongo DB it is in app             *
+// //*--------------------------------------------------*
 // var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/magazine');
 // mongoose.Promise = global.Promise;
@@ -15,33 +15,36 @@ var MagazineModel = require('../models/magazine.js');
 // db.once('open', function(){ console.log('[ XYZ ] Connected to Mongo DB'); });
 
 //*-----------------------------------------------------*
-//* ALL Routes :: /magazine                              *
+//* ROUTE :: INDEX :: Browse the index                  *
 //*-----------------------------------------------------*
-// ROUTE :: Browse the Index
 router.get('/', function(req, res){
-  console.log("===req.user===", req.user);
   if (!req.user) {
-    console.log("tiene que login");
     var viewData = {title: 'Magazine Login'};
     res.render('sec/login', viewData);
-    console.log("se envio para login");
   } else {
+    //var displayUser = req.user.username;
     MagazineModel.find({}, function(err, allMagazine){
       if (err) { console.log("*1*", err)};
       var viewData = {
         magazineIndex: allMagazine,
-        title: 'Browse Magazine'
+        title: 'Browse Magazine',
+        actualUser: req.user.username
       };
-      // var searchString = req.query.searchString;
-      // if (searchString) {
-      //    viewData.pokemonIndex = allPokemon.filter(function(pokemon){
-      //      return pokemon.name.toLowerCase().includes(searchString.toLowerCase());
-      //    });
-      //  };
+      var searchString = req.query.searchString;
+      console.log("buscame", searchString);
+      if (searchString) {
+         viewData.magazineIndex = allMagazine.filter(function(magazine){
+           return magazine.magazinename.toLowerCase().includes(searchString.toLowerCase());
+         });
+       };
       res.render('magazine/index', viewData);
     });
   }
 });
+
+//*-----------------------------------------------------*
+//* ROUTE :: NEW :: Create new Magazine record          *
+//*-----------------------------------------------------*
 
 // // ROUTE :: Create the NEW pokemon
 // router.post('/', function(req, res){
@@ -58,11 +61,18 @@ router.get('/', function(req, res){
 //   });
 // });
 
-// // ROUTE :: NEW to Display empty as NEW page
-// router.get('/new', function(req, res){
-//   var viewData = {title: 'New Pokemon'}
-//   res.render('pokemon/new', viewData);
-// });
+//*-----------------------------------------------------*
+//* ROUTE :: NEW :: Display new empty magazine page     *
+//*-----------------------------------------------------*
+router.get('/new', function(req, res){
+  if (!req.user) {
+    var viewData = {title: 'Magazine Login'};
+    res.render('sec/login', viewData);
+  } else {
+  var viewData = {title: 'New Magazine'}
+  res.render('magazine/new', viewData);
+  };
+});
 
 // // ROUTE :: SHOW to Display one pokemon page
 // router.get('/:npn', function(req, res){

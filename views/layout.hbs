@@ -12,9 +12,12 @@
         <a href='/'> Home </a>
         <a href='/magazine'> Magazines Index </a>
         <a href='/article'> Articles Index </a>
-        <form action="/sec/logout/?_method=DELETE" method="POST">
-          <input type="submit" value=" Logoff ">
-        </form>
+        {{#if actualUser}}
+          <form action="/sec/logout/?_method=DELETE" method="POST">
+            Welcome, {{actualUser}}
+            <input type="submit" value=" Logoff ">
+          </form>
+        {{/if}}
       </nav>
     </header>
     <div class='container'>
