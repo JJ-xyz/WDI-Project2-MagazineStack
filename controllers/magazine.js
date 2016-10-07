@@ -82,7 +82,7 @@ router.get('/:magId', function(req, res){
     res.render('sec/login', viewData);
   } else {
     MagazineModel.findOne({_id : req.params.magId}, function(err, oneMagazine){
-      if (err) { console.log("*3*", err)};
+      if (err) { console.log("*2*", err)};
       if (oneMagazine) {
         var viewData = oneMagazine;
         viewData.title = "Magazine";
@@ -93,29 +93,50 @@ router.get('/:magId', function(req, res){
       };
     });
   };
-
-
-
-
 });
 
+//*-----------------------------------------------------*
+//* ROUTE :: EDIT :: Display EDIT a magazine page       *
+//*-----------------------------------------------------*
+router.get('/:magId/edit', function(req, res){
+  if (!req.user) {
+    var viewData = {title: 'Magazine Login'};
+    res.render('sec/login', viewData);
+  } else {
+    MagazineModel.findOne({_id : req.params.magId}, function(err, oneMagazine){
+      if (err) { console.log("*3*", err)};
+      if (oneMagazine) {
+        var viewData = {
+          mag: oneMagazine,
+          actualUser: req.user.username,
+          title: "Magazine (edit)" };
+        res.render('magazine/edit', viewData);
+      } else {
+        res.redirect('/magazine');
+      };
+    });
+  };
+});
 
-// // ROUTE :: UPDATE the pokemon
-// router.patch('/:npn', function(req, res){
-//   // Tweak form data
-//   req.body.npn = Number(req.body.npn);
-//   if (req.body.typeTwo === 'None') {req.body.typeTwo = '';}
-//   // Update mongo DB
-//   PokemonModel.findOneAndUpdate({npn : req.body.npn}, req.body, function(err, onePokemon){
-//     if (err) {
-//       console.log("*4*", err);
-//       res.redirect(`/pokemon/${req.params.npn}/edit`);
-//       //res.redirect("pokemon/"+req.body.npn+"/edit")
-//     } else {
-//       res.redirect(`/pokemon/${req.params.npn}`);
-//     };
-//   });
-// });
+//*-----------------------------------------------------*
+//* ROUTE :: UPDATE :: Patch/Update magazine from EDIT  *
+//*-----------------------------------------------------*
+router.patch('/:magId', function(req, res){
+  if (!req.user) {
+    var viewData = {title: 'Magazine Login'};
+    res.render('sec/login', viewData);
+  } else {
+    MagazineModel.findOneAndUpdate({_id : req.params.magId}, req.body, function(err, oneMagazine){
+      if (err) {
+        console.log("*4*", err);
+        res.redirect(`/magazine/${req.params.magId}/edit`);
+        //res.redirect("magazine/"+req.body.magId+"/edit")
+      } else {
+        res.redirect(`/magazine/${req.params.magId}`);
+      };
+    });
+  };
+});
 
 // // ROUTE :: DESTROY to Display EDIT page
 // router.delete('/:npn', function(req, res){
@@ -133,28 +154,6 @@ router.get('/:magId', function(req, res){
 //   });
 // });
 
-//*-----------------------------------------------------*
-//* ROUTE :: EDIT :: Display EDIT a magazine page       *
-//*-----------------------------------------------------*
-// // ROUTE :: EDIT to Display EDIT page
-// router.get('/:npn/edit', function(req, res){
-//   // Tweak form data
-//   req.params.npn = Number(req.params.npn);
-//     // read mongo DB
-//   PokemonModel.findOne({npn : req.params.npn}, function(err, onePokemon){
-//     if (err) { console.log("*3*", err)};
-//     if (onePokemon) {
-//       var viewData = {
-//         pokemon: onePokemon,
-//         types: DS.getTypes(),
-//         regions: DS.getRegions(),
-//         title: `${onePokemon.name} (edit)`
-//       };
-//       res.render('pokemon/edit', viewData);
-//     } else {
-//       res.redirect('/pokemon');
-//     };
-//   });
-// });
+
 
 module.exports = router;
