@@ -35,34 +35,52 @@ var MagazineModel = require('../models/magazine.js');
 //*-----------------------------------------------------*
 //* ROUTE :: NEW :: Display new empty magazine page     *
 //*-----------------------------------------------------*
-router.get('/new', function(req, res){
+router.get('/:magId/new', function(req, res){
   if (!req.user) {
     var viewData = {title: 'Magazine Login'};
     res.render('sec/login', viewData);
   } else {
-  var viewData = {title: 'New Article', actualUser: req.user.username}
-  res.render('article/new', viewData);
+    MagazineModel.findOne({_id : req.params.magId}, function(err, oneMagazine){
+      if (err) { console.log("*2*", err)};
+      if (oneMagazine) {
+        var viewData = {
+          mag: oneMagazine,
+          title: "Article (new)",
+          actualUser: req.user.username };
+        res.render('article/new', viewData);
+      } else {
+        res.redirect(`/magazine/${req.params.magId}`);
+      };
+    });
   };
 });
 
-// //*-----------------------------------------------------*
-// //* ROUTE :: CREATE :: Create new record from NEW       *
-// //*-----------------------------------------------------*
-// router.post('/', function(req, res){
-//   if (!req.user) {
-//     var viewData = {title: 'Magazine Login'};
-//     res.render('sec/login', viewData);
-//   } else {
-//     MagazineModel.create(req.body, function(err, oneMagazine){
-//       if (err) {
-//         console.log("*2*", err);
-//         res.redirect('/magazine/new');
-//       } else {
-//         res.redirect('/magazine');
-//       }
-//     });
-//   };
-// });
+//*-----------------------------------------------------*
+//* ROUTE :: NO-CREATE :: add article element from NEW  *
+//*-----------------------------------------------------*
+router.post('/:magId', function(req, res){
+  if (!req.user) {
+    var viewData = {title: 'Magazine Login'};
+    res.render('sec/login', viewData);
+  } else {
+    // ============= Asking for a promise ============
+    MagazineModel.findOne({_id : req.params.magId}).exec()
+    .then(function(oneMagazine){
+      var z = oneMagazine.articleList.findIndex(function(article) {
+        return article._id == req.params.artId;
+      });
+      oneMagazine.articleList.push(req.body);
+      return oneMagazine.save();
+    })
+    .then(function(oneMagazine) {
+      res.redirect(`/magazine/${req.params.magId}`);
+    })
+    .catch(function(err) {
+      console.log("*5*", err);
+      res.redirect(`/article/${req.params.magId}/${req.params.artId}/edit`);
+    });
+  };
+});
 
 //*-----------------------------------------------------*
 //* ROUTE :: SHOW :: Display ONE article page           *
@@ -150,50 +168,6 @@ router.patch('/:magId/:artId', function(req, res){
     });
   };
 });
-
-// //*-----------------------------------------------------*
-// //* NO-ROUTE :: UPDATE :: Patch/Update article from EDIT*
-// //*-----------------------------------------------------*
-// router.patch('/:magId/:artId', function(req, res){
-//   if (!req.user) {
-//     var viewData = {title: 'Magazine Login'};
-//     res.render('sec/login', viewData);
-//   } else {
-//     MagazineModel.findOne({_id : req.params.magId}, function(err, oneMagazine){
-//       if (err) {
-//         console.log("*5*", err);
-//         res.redirect(`/article/${req.params.magId}/${req.params.artId}/edit`);
-//       } else {
-//         if (oneMagazine) {
-//           var z = oneMagazine.articleList.findIndex(function(article) {
-//             return article._id == req.params.artId;
-//           });
-//           console.log("array", oneMagazine.articleList[z]);
-//           console.log("paged", req.body.title);
-//           // oneMagazine.articleList[z].title = req.body.title;
-//           // oneMagazine.articleList[z].author = req.body.author;
-//           // oneMagazine.articleList[z].topic = req.body.topic;
-//           // oneMagazine.articleList[z].abstract = req.body.abstract;
-//           oneMagazine.articleList[z] = req.body;
-//           // MagazineModel.save();
-//           MagazineModel.save(function (err, oneMagazine) {
-//             if (err) {
-//               console.log("*5b*", err);
-//               res.redirect(`/article/${req.params.magId}/${req.params.artId}/edit`);
-//             } else {
-//               res.redirect(`article/${req.params.magId}/${req.params.artId}`);
-//             }
-//           // if (err) {
-//           //   console.log("*5b*", err);
-//           //   res.redirect(`/article/${req.params.magId}/${req.params.artId}/edit`);
-//           // }
-//           // res.redirect(`article/${req.params.magId}/${req.params.artId}`);
-//           });
-//         };
-//       };
-//     });
-//   };
-// });
 
 //*-----------------------------------------------------*
 //* ROUTE :: NO-DESTROY :: remove article from EDIT     *

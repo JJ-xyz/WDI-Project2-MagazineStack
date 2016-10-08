@@ -6,7 +6,7 @@
 <p>This magazine is currently located at the {{mag.baseLocation}}</P>
 <main>
   <p> Enter the article info to edit </p>
-  <form class="edit-article" method="POST" action="/article/{{mag._id}}/{{art._id}}?_method=PATCH">
+  <form class="edit-article" method="POST" action="/article/{{mag._id}}">
     <label for="title">Title:</label>
     <input name="title" value="">
     <label for="author">Author:</label>
