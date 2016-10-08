@@ -1,0 +1,25 @@
+<h2> Edit Article </h2>
+<h3> {{mag.magazinename}}</h3>
+<h4> {{mag.coverTitle}}</h4>
+<p>Volume {{mag.editionVolume}} Number {{mag.editionNumber}}</p>
+<p><span>Period {{mag.editionPeriod}}</span></p>
+<p>This magazine is currently located at the {{mag.baseLocation}}</P>
+<main>
+  <p> Enter the article info to edit </p>
+  <form class="edit-article" method="POST" action="/article/{{mag._id}}/{{art._id}}?_method=PATCH">
+    <label for="title">Title:</label>
+    <input name="title" value="{{art.title}}">
+    <label for="author">Author:</label>
+    <input name="author" value="{{art.author}}">
+    <label for="topic">Topic:</label>
+    <input name="topic" value="{{art.topic}}">
+    <label for="abstract">Abstract:</label>
+    <input name="abstract" value="{{art.abstract}}">
+
+    <input type="submit" value=" Update Article ">
+  </form>
+  <form class="delete-article" method='POST' action='/article/{{mag._id}}/{{art._id}}/?_method=DELETE'>
+    <input type='submit' value='Delete Magazine'/>
+  </form>
+  <a href='/article/{{mag._id}}/{{art._id}}'> Return view Article </a>
+</main>

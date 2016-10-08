@@ -91,28 +91,32 @@ router.get('/:magId/:artId', function(req, res){
   };
 });
 
-// //*-----------------------------------------------------*
-// //* ROUTE :: EDIT :: Display EDIT a magazine page       *
-// //*-----------------------------------------------------*
-// router.get('/:magId/edit', function(req, res){
-//   if (!req.user) {
-//     var viewData = {title: 'Magazine Login'};
-//     res.render('sec/login', viewData);
-//   } else {
-//     MagazineModel.findOne({_id : req.params.magId}, function(err, oneMagazine){
-//       if (err) { console.log("*4*", err)};
-//       if (oneMagazine) {
-//         var viewData = {
-//           mag: oneMagazine,
-//           actualUser: req.user.username,
-//           title: "Magazine (edit)" };
-//         res.render('magazine/edit', viewData);
-//       } else {
-//         res.redirect('/magazine');
-//       };
-//     });
-//   };
-// });
+//*-----------------------------------------------------*
+//* ROUTE :: EDIT :: Display EDIT article from SHOW     *
+//*-----------------------------------------------------*
+router.get('/:magId/:artId/edit', function(req, res){
+  if (!req.user) {
+    var viewData = {title: 'Magazine Login'};
+    res.render('sec/login', viewData);
+  } else {
+    MagazineModel.findOne({_id : req.params.magId}, function(err, oneMagazine){
+      if (err) { console.log("*4*", err)};
+      if (oneMagazine) {
+        var z = oneMagazine.articleList.findIndex(function(article) {
+          return article._id == req.params.artId;
+        });
+        var viewData = {
+          mag: oneMagazine,
+          actualUser: req.user.username,
+          art: oneMagazine.articleList[z],
+          title: "Article (edit)" };
+        res.render('article/edit', viewData);
+      } else {
+        res.redirect('/magazine');
+      };
+    });
+  };
+});
 
 // //*-----------------------------------------------------*
 // //* ROUTE :: UPDATE :: Patch/Update magazine from EDIT  *
