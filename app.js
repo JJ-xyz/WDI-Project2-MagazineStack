@@ -31,10 +31,7 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', function(err){ console.log(err); });
 db.once('open', function(){ console.log('[ XYZ ] Connected to Mongo DB'); });
-// ================ MONGO Database ===================
-//var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/magazine');
-//mongoose.Promise = global.Promise;
+
 //*-----------------------------------------------------*
 //* MODULES definition - Midleware                      *
 //*-----------------------------------------------------*
@@ -67,6 +64,7 @@ passport.deserializeUser(UserModel.deserializeUser());
 //*-----------------------------------------------------*
 app.use('/', require('./controllers/home.js'));
 app.use('/magazine', require('./controllers/magazine.js'));
+app.use('/article', require('./controllers/article.js'));
 app.use('/sec', require('./controllers/sec.js'));
 
 app.listen(process.env.PORT || 3000);

@@ -1,0 +1,19 @@
+<h2> {{mag.magazinename}}</h2>
+<h3> {{mag.coverTitle}}</h3>
+<p>Volume {{mag.editionVolume}} Number {{mag.editionNumber}}</p>
+<p><span>Period {{mag.editionPeriod}}</span></p>
+<p>This magazine is currently located at the {{mag.baseLocation}}</P>
+<main>
+
+  <h3> The Article </h3>
+  <p>Title <span>{{art.title}}</span></p>
+  <p>Author <span>{{art.author}}</span></p>
+  <p>Topic:</p>
+  <p>{{art.topic}}</p>
+  <p>Abstract:</p>
+  <p>{{art.abstract}}</p>
+
+</main><hr>
+<footer>
+  <a href='/article/{{mag._id}}/{{art._id}}/edit'> Edit this article </a>
+</footer>

@@ -76,6 +76,9 @@ router.get('/:magId', function(req, res){
       if (err) { console.log("*3*", err)};
       if (oneMagazine) {
         var viewData = oneMagazine;
+        viewData.articleList.map(function(z) {
+          z.parentLink = oneMagazine._id;
+        });
         viewData.title = "Magazine";
         viewData.actualUser = req.user.username;
         res.render('magazine/show', viewData);
