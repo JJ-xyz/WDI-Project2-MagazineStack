@@ -1,15 +1,16 @@
 <h2> {{magazinename}}</h2>
 <h3> {{coverTitle}}</h3>
-<p>Volume {{editionVolume}} Number {{editionNumber}}</p>
-<p><span>Period {{editionPeriod}}</span></p>
-<p>This magazine is currently located at the {{baseLocation}}</P>
+<p>Volume {{editionVolume}} Number {{editionNumber}}<br>
+<span>Period {{editionPeriod}}</span>
+<br>This magazine is currently located at the {{baseLocation}}</P>
 <main>
   <h3> Articles </h3>
   <ul>
   {{#each articleList}}
-    <li>
+    <li class="art-li">
       <a href='/article/{{parentLink}}/{{_id}}'>
-        <span> {{title}} : {{author}} </span>
+        <span class="wire-one"> {{title}}</span>
+        <span class="chathura">By {{author}} </span>
       </a>
     </li>
   {{/each}}

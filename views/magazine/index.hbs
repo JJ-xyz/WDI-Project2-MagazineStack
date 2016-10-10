@@ -8,12 +8,12 @@
 </form>
 <ul>
 {{#each magazineIndex}}
-  <li>
+  <li class="mag-li">
     <a href='/magazine/{{_id}}'>
-      <span> {{magazinename}} : {{coverTitle}} </span>
+      <span class="wire-one"> {{magazinename}} </span><br>
+      <span class="chathura"> {{coverTitle}} </span>
     </a>
   </li>
 {{/each}}
 </ul>
-<hr>
 <a href='/magazine/new'> Add a new Magazine To the Index </a>

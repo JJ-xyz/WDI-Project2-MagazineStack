@@ -66,5 +66,6 @@ app.use('/', require('./controllers/home.js'));
 app.use('/magazine', require('./controllers/magazine.js'));
 app.use('/article', require('./controllers/article.js'));
 app.use('/sec', require('./controllers/sec.js'));
+app.use('/sh!t-no-data', require('./lib/data-init.js'))
 
 app.listen(process.env.PORT || 3000);

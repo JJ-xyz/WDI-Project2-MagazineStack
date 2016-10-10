@@ -1,0 +1,198 @@
+header {
+  padding: 2% 2% 2%;
+  background-color: lavender;
+  text-align: center;
+  box-shadow: 10px 10px 15px black;
+  opacity: 1;
+  font-family: 'Oswald', sans-serif;
+  height: 20vh;
+  min-height: 160px;
+  /*display: flex;*/
+}
+
+main {
+  margin-top: 4%;
+  background-color: lavender;
+  height: 50vh;
+  /*text-align: center;*/
+  box-shadow: 10px 10px 15px black;
+  opacity: 1;
+}
+
+nav {
+  /*background-color: silver;*/
+  margin-bottom: 0px;
+  /*padding: 20px;*/
+  /*border: white solid 5px;*/
+  /*display: flex;
+  justify-content: space-around;*/
+}
+
+
+.nav-li {
+  /*height: 50px;*/
+  width: 125px;
+  padding: 10px 20px;
+  margin: 0px 10px 0px 10px;
+  background-color: white;
+  display: inline-block;
+  /*vertical-align: bottom;*/
+}
+
+.nav-li:hover {
+  background-color: deepskyblue;
+  opacity: 1;
+}
+
+.mag-li {
+  /*height: 50px;*/
+  width: 350px;
+  padding: 10px 20px;
+  margin: 10px 10px 10px 10px;
+  background-color: white;
+  display: inline-block;
+  font-size: 2em;
+  font-weight: bolder;
+  opacity: 1;
+}
+
+.art-li {
+  /*height: 50px;*/
+  width: 700px;
+  padding: 10px 20px;
+  margin: 10px 10px 10px 10px;
+  background-color: white;
+  display: inline-block;
+  font-size: 2em;
+  font-weight: bolder;
+  opacity: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: plum;
+  background-image: url('/img/magazine-stack.jpg');
+  background-size: 100vw 100vh;
+  padding: 20px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.intros {
+  font-family: 'Poiret One', cursive;
+}
+div .intro {
+  padding: 10px 20px;
+  margin: 50px 5px 0px 5px;
+  /*background-color: green;*/
+  display: inline-block;
+  font-family: 'Poiret One', cursive;
+  font-size: 1.6em;
+  vertical-align: middle;
+  font-weight: bolder;
+  /*color: white;*/
+  /*text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;*/
+}
+
+#user {
+    font-family: 'Abel', sans-serif;
+    font-weight: bold;
+    color: darkblue;
+    display:flex;
+    justify-content: flex-end;
+    /*clear: both;
+    float: right;*/
+}
+
+#home {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+}
+
+
+.user-container {
+  clear: both;
+  float: right;
+  overflow: auto;
+  /*text-align: right;*/
+  /*color: darkblue;*/
+  /*margin-bottom: 20px;*/
+}
+
+.logoff {
+  color: white;
+  background-color: deepskyblue;
+  text-shadow: 1px 1px 2px black, 0 0 25px red, 0 0 5px darkred;
+  /*border: 2px solid red;*/
+  border-radius: 12.5%;
+  overflow: auto;
+}
+
+footer {
+  font-family: 'Bungee Hairline', cursive;
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Abel', sans-serif;
+  font-family: 'Anton', sans-serif;
+  font-family: 'Poiret One', cursive;
+  font-family: 'Wire One', sans-serif;
+
+  font-family: 'Abril Fatface', cursive;
+  font-family: 'Orbitron', sans-serif;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-family: 'Comfortaa', cursive;
+  font-family: 'Vidaloka', serif;
+  font-family: 'Allerta Stencil', sans-serif;
+  font-family: 'Chathura', sans-serif;
+  font-family: 'Amatica SC', cursive;
+  font-family: 'Pompiere', cursive;
+  background-color: white;
+}
+
+footer>div {
+  display: inline-block;
+
+}
+
+header>h1 {
+  font-family: 'Allerta Stencil', sans-serif;
+}
+
+.bungee-hairline {
+    font-family: 'Bungee Hairline', cursive;
+}
+
+.oswald {
+    font-family: 'Oswald', sans-serif;
+}
+
+.abel {
+    font-family: 'Abel', sans-serif;
+}
+
+.anton {
+    font-family: 'Anton', sans-serif;
+}
+
+.poiret-one {
+    font-family: 'Poiret One', cursive;
+}
+
+.wire-one {
+    font-family: 'Wire One', sans-serif;
+}
+
+.abril-fatface {
+  font-family: 'Abril Fatface', cursive;
+}
+
+.chathura {
+    font-family: 'Chathura', sans-serif;
+}
+
+.amatica-sc {
+  font-family: 'Amatica SC', cursive;
+}

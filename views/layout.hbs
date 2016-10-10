@@ -2,28 +2,46 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link href='/css/main.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Allerta+Stencil|Amatica+SC|Chathura|Comfortaa|Gloria+Hallelujah|Orbitron|Pompiere|Vidaloka" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Anton|Bungee+Hairline|Oswald|Poiret+One|Wire+One|Abril+Fatface" rel="stylesheet">
+    <link href='/css/style.css' rel='stylesheet'>
     <title>{{title}}</title>
   </head>
   <body>
-    <header>
-      <h1> Magazine's Article Management </h1>
+    <header class="top-container">
+      <h1> Magazine Stack's Article Management </h1>
+
       <nav>
-        <a href='/'> Home </a>
-        <a href='/magazine'> Magazines Index </a>
+        <ul class="nav-ul">
+          <li class="nav-li"><a href='/'> Home </a></li>
+          <li class="nav-li"><a href='/magazine'> Magazines </a></li>
         <!-- <a href='/article'> Articles Index </a>  future enhancement-->
+      </ul>
+      </nav>
+
+      <div name="user" class="user-container">
         {{#if actualUser}}
           <form action="/sec/logout/?_method=DELETE" method="POST">
-            Welcome, {{actualUser}}
-            <input type="submit" value=" Logoff ">
+            Welcome back, <span>{{actualUser}}</span>
+            <input name="logoff" class="logoff" type="submit" value=" Logoff ">
           </form>
         {{/if}}
-      </nav>
+      </div>
+
     </header>
-    <div class='container'>
+    <main class='container'>
       {{{ body }}}
-    </div>
+    </main>
     <footer>
+      <!-- <div class="bungee-hairline">Bungee Hairline</div>
+      <div class="oswald">Oswald</div>
+      <div class="abel">Abel</div>
+      <div class="anton">Anton</div>
+      <div class="poiret-one">Poiret One</div>
+      <div class="wire-one">Wire One</div>
+      <div class="abril-fatface">Abril Fatface</div>
+      <div class="chathura">Chathura</div>
+      <div class="amatica-sc">Amatica SC</div> -->
     </footer>
   </body>
 </html>
